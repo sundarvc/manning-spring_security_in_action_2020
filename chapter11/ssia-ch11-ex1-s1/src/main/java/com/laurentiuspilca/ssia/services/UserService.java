@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +48,10 @@ public class UserService {
         }
     }
 
+    public List<User> listAll(){
+        return  userRepository.findAll();
+    }
+
     public boolean check(Otp otpToValidate) {
         Optional<Otp> userOtp = otpRepository.findOtpByUsername(otpToValidate.getUsername());
         if (userOtp.isPresent()) {
@@ -74,4 +79,7 @@ public class UserService {
         }
     }
 
+    public List<Otp> listOtps() {
+        return otpRepository.findAll();
+    }
 }
